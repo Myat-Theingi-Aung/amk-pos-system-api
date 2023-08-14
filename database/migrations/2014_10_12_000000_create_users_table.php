@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('address');
             $table->string('NRC')->nullable();
             $table->string('insurance_name')->nullable();
+            $table->enum('type', ['customer', 'admin'])->default('customer');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
