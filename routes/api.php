@@ -10,9 +10,9 @@ Route::post('/register', [UserController::class, 'store']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/users', [ UserController::class, 'index' ]);
-    Route::get('/user/{user}', [ UserController::class, 'show' ]);
-    Route::put('/user/{user}', [ UserController::class, 'update' ]);
-    Route::delete('/user/{user}', [ UserController::class, 'destroy' ]);
+    Route::get('/users/{user}', [ UserController::class, 'show' ]);
+    Route::put('/users/{user}', [ UserController::class, 'update' ]);
+    Route::delete('/users/{user}', [ UserController::class, 'destroy' ]);
 
     Route::get('/categories', [CategoryController::class, 'index']);
     Route::post('/categories', [CategoryController::class, 'store']);

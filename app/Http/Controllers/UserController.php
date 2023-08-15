@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 
 class UserController extends Controller
 {
-   /**
+    /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $users = User::when(request('search'), function($query){
             $search = '%' . request('search') . '%';
@@ -35,7 +36,7 @@ class UserController extends Controller
 
         $cookie = cookie('token', $token, 60 * 24); // 1 day
 
-        return response()->json(['message' => 'User updated successfully','user' => new UserResource($user)])->withCookie($cookie);
+        return response()->json(['message' => 'User created successfully','user' => new UserResource($user)])->withCookie($cookie);
     }
 
     /**
@@ -62,6 +63,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+
         return response()->json(['message' => 'User deleted successfully']);
     }
 }
