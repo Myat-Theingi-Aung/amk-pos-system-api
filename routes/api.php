@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CategoryTypeController;
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [UserController::class, 'store']);
@@ -13,6 +14,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/users/{user}', [ UserController::class, 'show' ]);
     Route::put('/users/{user}', [ UserController::class, 'update' ]);
     Route::delete('/users/{user}', [ UserController::class, 'destroy' ]);
+
+    Route::get('/category_types', [CategoryTypeController::class, 'index']);
+    Route::post('/category_types', [CategoryTypeController::class, 'store']);
+    Route::get('/category_types/{category_type}', [CategoryTypeController::class, 'show']);
+    Route::put('/category_types/{category_type}', [CategoryTypeController::class, 'update']);
+    Route::delete('/category_types/{category_type}', [CategoryTypeController::class, 'destroy']);
 
     Route::get('/categories', [CategoryController::class, 'index']);
     Route::post('/categories', [CategoryController::class, 'store']);
