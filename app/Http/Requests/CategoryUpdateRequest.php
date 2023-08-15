@@ -22,7 +22,15 @@ class CategoryUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'nullable|max:255'
+            'name' => 'nullable|max:255',
+            'category_type_id' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'category_type_id.required' => 'The category type is required.',
         ];
     }
 }

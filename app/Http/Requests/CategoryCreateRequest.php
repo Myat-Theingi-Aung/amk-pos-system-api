@@ -22,7 +22,15 @@ class CategoryCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:255|unique:categories,name'
+            'name' => 'required|max:255|unique:categories,name',
+            'category_type_id' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'category_type_id.required' => 'The category type is required.',
         ];
     }
 }
