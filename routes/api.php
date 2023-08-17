@@ -16,11 +16,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/users/{user}', [ UserController::class, 'update' ]);
     Route::delete('/users/{user}', [ UserController::class, 'destroy' ]);
 
-    Route::get('/categories_type', [CategoryTypeController::class, 'index']);
-    Route::post('/categories_type', [CategoryTypeController::class, 'store']);
-    Route::get('/categories_type/{category_type}', [CategoryTypeController::class, 'show']);
-    Route::put('/categories_type/{category_type}', [CategoryTypeController::class, 'update']);
-    Route::delete('/categories_type/{category_type}', [CategoryTypeController::class, 'destroy']);
+    Route::get('/category_types', [CategoryTypeController::class, 'index']);
+    Route::post('/category_types', [CategoryTypeController::class, 'store']);
+    Route::get('/category_types/{category_type}', [CategoryTypeController::class, 'show']);
+    Route::put('/category_types/{category_type}', [CategoryTypeController::class, 'update']);
+    Route::delete('/category_types/{category_type}', [CategoryTypeController::class, 'destroy']);
 
     Route::get('/categories', [CategoryController::class, 'index']);
     Route::post('/categories', [CategoryController::class, 'store']);
