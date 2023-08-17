@@ -10,6 +10,7 @@ class CategoryType extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'category_types';
     /**
      * The attributes that are mass assignable.
      *
