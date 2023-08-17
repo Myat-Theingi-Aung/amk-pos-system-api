@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\CategoryType;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CategoryCreateRequest extends FormRequest
@@ -22,7 +24,15 @@ class CategoryCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:255|unique:categories,name'
+            'name' => 'required|max:255|unique:categories,name',
+            'category_type_id' => ['required', Rule::exists(CategoryType::class, 'id')]
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'category_type_id.required' => "Category Type field is required"
         ];
     }
 }

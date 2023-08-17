@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Category;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProductCreateRequest extends FormRequest
@@ -23,7 +25,7 @@ class ProductCreateRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'category_id' => 'required',
+            'category_id' => ['required', Rule::exists(Category::class, 'id')],
             'image' => 'nullable|mimes:jpeg,png,jpg,jfif',
             'price' => 'required|regex:/[0-9]/|min:3|max:10',
             'quantity' => 'required',

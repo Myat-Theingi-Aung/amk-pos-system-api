@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\CategoryType;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CategoryUpdateRequest extends FormRequest
@@ -22,7 +24,15 @@ class CategoryUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'nullable|max:255'
+            'name' => 'required|max:255',
+            'category_type_id' => ['required', Rule::exists(CategoryType::class, 'id')]
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'category_type_id.required' => "Category Type field is required"
         ];
     }
 }
