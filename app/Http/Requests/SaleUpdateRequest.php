@@ -32,8 +32,8 @@ class SaleUpdateRequest extends FormRequest
             'sale_items.*.product_id' => ['required', Rule::exists(Product::class, 'id')],
             'sale_items.*.quantity' => 'required',
             'sale_items.*.price' => 'required',
-            'sale_items.*.payment_start_period' => 'required',
-            'sale_items.*.payment_end_period' => 'required',
+            'sale_items.*.payment_start_period' => 'required', 'date_format:Y-m-d',
+            'sale_items.*.payment_end_period' => 'required', 'date_format:Y-m-d'
         ];
     }
 

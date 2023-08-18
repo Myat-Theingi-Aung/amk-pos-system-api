@@ -15,6 +15,7 @@ class SaleItemResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'sale_id' => $this->sale_id,
             'product_id' => $this->product_id,
             'quantity' => $this->quantity,
