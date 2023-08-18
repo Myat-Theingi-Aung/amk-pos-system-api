@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('price');
             $table->date('payment_start_period');
             $table->date('payment_end_period');
-            $table->boolean('cancel');
+            $table->boolean('cancel')->default(0);
             $table->foreign('sale_id')->references('id')->on('sales')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->timestamps();
