@@ -18,5 +18,19 @@ class ProductSeeder extends Seeder
             'price' => 200000,
             'quantity' => 2,
         ]);
+
+        Product::create([
+            'name' => 'ဒယ်နီ',
+            'category_id' => 1,
+            'price' => 40000,
+            'quantity' => 2,
+        ]);
+
+        Product::create([
+            'name' => 'ဗီရို',
+            'category_id' => 1,
+            'price' => 260000,
+            'quantity' => 2,
+        ]);
     }
 }
