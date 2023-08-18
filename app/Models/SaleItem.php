@@ -24,4 +24,9 @@ class SaleItem extends Model
         'payment_end_period',
         'cancel'
     ];
+
+    public function sale()
+    {
+        return $this->belongsTo(Sale::class);
+    }
 }
