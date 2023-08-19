@@ -32,8 +32,8 @@ class SaleCreateRequest extends FormRequest
             'sale_items.*.product_id' => ['required', Rule::exists(Product::class, 'id')],
             'sale_items.*.quantity' => 'required',
             'sale_items.*.price' => 'required',
-            'sale_items.*.payment_start_period' => 'required',
-            'sale_items.*.payment_end_period' => 'required',
+            'sale_items.*.payment_start_period' => 'required', 'date_format:Y-m-d',
+            'sale_items.*.payment_end_period' => 'required', 'date_format:Y-m-d',
         ];
     }
 
@@ -46,6 +46,13 @@ class SaleCreateRequest extends FormRequest
             'sale_items.*.price.required' => 'Price field is required',
             'sale_items.*.payment_start_period.required' => 'Payment start period is required',
             'sale_items.*.payment_end_period.required' => 'Payment end period is required',
+        ];
+    }
+
+    public function message(){
+        return [
+            'sale_id.required' => 'Sale is required',
+            'product_id.required' => 'Product name is required'
         ];
     }
 }

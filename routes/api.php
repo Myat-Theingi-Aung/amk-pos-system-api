@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryTypeController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\SaleItemController;
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [UserController::class, 'store']);
@@ -41,6 +42,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/sales/{sale}', [SaleController::class, 'show']);
     Route::put('/sales/{sale}', [SaleController::class, 'update']);
     Route::delete('/sales/{sale}', [SaleController::class, 'destroy']);
+
+    Route::get('/sale_items', [SaleItemController::class, 'index']);
+    Route::post('/sale_items', [SaleItemController::class, 'store']);
+    Route::get('/sale_items/{saleItem}', [SaleItemController::class, 'show']);
+    Route::put('/sale_items/{saleItem}', [SaleItemController::class, 'update']);
+    Route::delete('/sale_items/{saleItem}', [SaleItemController::class, 'destroy']);
 
     Route::get('/payments', [PaymentController::class, 'index']);
     Route::post('/payments', [PaymentController::class, 'store']);
