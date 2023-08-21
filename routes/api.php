@@ -9,51 +9,59 @@ use App\Http\Controllers\CategoryTypeController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SaleItemController;
+use App\Http\Middleware\RoleChecker;
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [UserController::class, 'store']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/users', [ UserController::class, 'index' ]);
+    Route::middleware([RoleChecker::class . ':admin'])->group(function () {
+        Route::get('/users', [ UserController::class, 'index' ]);
+        Route::delete('/users/{user}', [ UserController::class, 'destroy' ]);
+
+        Route::get('/category_types', [CategoryTypeController::class, 'index']);
+        Route::post('/category_types', [CategoryTypeController::class, 'store']);
+        Route::get('/category_types/{category_type}', [CategoryTypeController::class, 'show']);
+        Route::put('/category_types/{category_type}', [CategoryTypeController::class, 'update']);
+        Route::delete('/category_types/{category_type}', [CategoryTypeController::class, 'destroy']);
+
+        Route::get('/categories', [CategoryController::class, 'index']);
+        Route::post('/categories', [CategoryController::class, 'store']);
+        Route::get('/categories/{category}', [CategoryController::class, 'show']);
+        Route::put('/categories/{category}', [CategoryController::class, 'update']);
+        Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
+        
+        Route::post('/products', [ProductController::class, 'store']);
+        Route::put('/products/{product}', [ProductController::class, 'update']);
+        Route::delete('/products/{product}', [ProductController::class, 'destroy']);
+
+        Route::get('/sales', [SaleController::class, 'index']);
+        Route::post('/sales', [SaleController::class, 'store']);
+        Route::get('/sales/{sale}', [SaleController::class, 'show']);
+        Route::put('/sales/{sale}', [SaleController::class, 'update']);
+        Route::delete('/sales/{sale}', [SaleController::class, 'destroy']);
+
+        Route::get('/sale_items', [SaleItemController::class, 'index']);
+        Route::post('/sale_items', [SaleItemController::class, 'store']);
+        Route::get('/sale_items/{saleItem}', [SaleItemController::class, 'show']);
+        Route::put('/sale_items/{saleItem}', [SaleItemController::class, 'update']);
+        Route::delete('/sale_items/{saleItem}', [SaleItemController::class, 'destroy']);
+        
+        Route::get('/payments', [PaymentController::class, 'index']);
+        Route::post('/payments', [PaymentController::class, 'store']);
+        Route::get('/payments/{payment}', [PaymentController::class, 'show']);
+        Route::put('/payments/{payment}', [PaymentController::class, 'update']);
+        Route::delete('/payments/{payment}', [PaymentController::class, 'destroy']);
+    });
+
     Route::get('/users/{user}', [ UserController::class, 'show' ]);
     Route::put('/users/{user}', [ UserController::class, 'update' ]);
-    Route::delete('/users/{user}', [ UserController::class, 'destroy' ]);
-
-    Route::get('/category_types', [CategoryTypeController::class, 'index']);
-    Route::post('/category_types', [CategoryTypeController::class, 'store']);
-    Route::get('/category_types/{category_type}', [CategoryTypeController::class, 'show']);
-    Route::put('/category_types/{category_type}', [CategoryTypeController::class, 'update']);
-    Route::delete('/category_types/{category_type}', [CategoryTypeController::class, 'destroy']);
-
-    Route::get('/categories', [CategoryController::class, 'index']);
-    Route::post('/categories', [CategoryController::class, 'store']);
-    Route::get('/categories/{category}', [CategoryController::class, 'show']);
-    Route::put('/categories/{category}', [CategoryController::class, 'update']);
-    Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
 
     Route::get('/products', [ProductController::class, 'index']);
-    Route::post('/products', [ProductController::class, 'store']);
     Route::get('/products/{product}', [ProductController::class, 'show']);
-    Route::put('/products/{product}', [ProductController::class, 'update']);
-    Route::delete('/products/{product}', [ProductController::class, 'destroy']);
 
-    Route::get('/sales', [SaleController::class, 'index']);
-    Route::post('/sales', [SaleController::class, 'store']);
-    Route::get('/sales/{sale}', [SaleController::class, 'show']);
-    Route::put('/sales/{sale}', [SaleController::class, 'update']);
-    Route::delete('/sales/{sale}', [SaleController::class, 'destroy']);
-
-    Route::get('/sale_items', [SaleItemController::class, 'index']);
-    Route::post('/sale_items', [SaleItemController::class, 'store']);
-    Route::get('/sale_items/{saleItem}', [SaleItemController::class, 'show']);
-    Route::put('/sale_items/{saleItem}', [SaleItemController::class, 'update']);
-    Route::delete('/sale_items/{saleItem}', [SaleItemController::class, 'destroy']);
-
-    Route::get('/payments', [PaymentController::class, 'index']);
-    Route::post('/payments', [PaymentController::class, 'store']);
-    Route::get('/payments/{payment}', [PaymentController::class, 'show']);
-    Route::put('/payments/{payment}', [PaymentController::class, 'update']);
-    Route::delete('/payments/{payment}', [PaymentController::class, 'destroy']);
+    Route::get('/sales/{user}/user', [SaleController::class, 'userSale']);
+    Route::get('/payments/{user}/user', [PaymentController::class, 'userPayment']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sale;
+use App\Models\User;
 use App\Models\SaleItem;
 use App\Http\Resources\SaleResource;
 use App\Http\Requests\SaleCreateRequest;
 use App\Http\Requests\SaleUpdateRequest;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
 class SaleController extends Controller
 {
@@ -92,5 +94,12 @@ class SaleController extends Controller
         $sale->delete();
 
         return response()->json(['message' => 'Sale deleted successfully']);
+    }
+
+    public function userSale(User $user)
+    {
+       $sales = Sale::where('user_id', $user->id)->with('saleItems')->get();
+
+        return response()->json(["success",$sales]);
     }
 }

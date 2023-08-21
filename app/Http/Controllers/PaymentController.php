@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sale;
+use App\Models\User;
 use App\Models\Payment;
 use App\Http\Resources\PaymentResource;
 use App\Http\Requests\PaymentCreateRequest;
@@ -66,6 +67,13 @@ class PaymentController extends Controller
         $payment->delete();
 
         return response()->json(['message' => 'Payment deleted successfully']);
+    }
+
+    public function userPayment(User $user)
+    {
+        $payments = Payment::where('user_id', $user->id)->get();
+
+        return response()->json($payments);
     }
 
     private function checkForCategoryType($sales, $requestCategoryTypeId) 

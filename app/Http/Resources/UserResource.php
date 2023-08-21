@@ -22,7 +22,7 @@ class UserResource extends JsonResource
             'address' => $this->address,
             'NRC' => $this->NRC,
             'insurance_name' => $this->insurance_name,
-            'type' => $this->type,
+            'role' => $this->role,
             'color' => $this->color,
             'boyfriend' => $this->boyfriend,
             'created_at' => $this->created_at,
