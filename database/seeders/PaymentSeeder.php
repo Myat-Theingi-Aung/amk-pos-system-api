@@ -21,9 +21,23 @@ class PaymentSeeder extends Seeder
         ]);
 
         Payment::create([
+            'user_id' => 1,
+            'category_type_id' => 2,
+            'amount' => 2000,
+            'date' => Carbon::today()
+        ]);
+
+        Payment::create([
             'user_id' => 2,
             'category_type_id' => 1,
             'amount' => 3000,
+            'date' => Carbon::today()
+        ]);
+
+        Payment::create([
+            'user_id' => 3,
+            'category_type_id' => 1,
+            'amount' => 2000,
             'date' => Carbon::today()
         ]);
 

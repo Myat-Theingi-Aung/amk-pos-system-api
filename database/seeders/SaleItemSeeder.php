@@ -17,7 +17,7 @@ class SaleItemSeeder extends Seeder
             'sale_id' => 1,
             'product_id' => 1,
             'quantity' => 1,
-            'price' => 100000,
+            'price' => 200000,
             'payment_start_period' => Carbon::today(),
             'payment_end_period' => Carbon::today()->addMonth(),
         ]);
@@ -26,7 +26,25 @@ class SaleItemSeeder extends Seeder
             'sale_id' => 1,
             'product_id' => 2,
             'quantity' => 1,
-            'price' => 100000,
+            'price' => 40000,
+            'payment_start_period' => Carbon::today(),
+            'payment_end_period' => Carbon::today()->addMonth(),
+        ]);
+
+        SaleItem::create([
+            'sale_id' => 2,
+            'product_id' => 2,
+            'quantity' => 1,
+            'price' => 260000,
+            'payment_start_period' => Carbon::today(),
+            'payment_end_period' => Carbon::today()->addMonth(),
+        ]);
+
+        SaleItem::create([
+            'sale_id' => 3,
+            'product_id' => 2,
+            'quantity' => 1,
+            'price' => 40000,
             'payment_start_period' => Carbon::today(),
             'payment_end_period' => Carbon::today()->addMonth(),
         ]);
@@ -35,7 +53,7 @@ class SaleItemSeeder extends Seeder
             'sale_id' => 3,
             'product_id' => 3,
             'quantity' => 1,
-            'price' => 100000,
+            'price' => 260000,
             'payment_start_period' => Carbon::today(),
             'payment_end_period' => Carbon::today()->addMonth(),
         ]);
