@@ -19,7 +19,9 @@ class UserSeeder extends Seeder
             'NRC' => '7/PAMANA(N)123456',
             'type' => 'admin',
             'email' => 'admin@admin.com',
-            'password' => bcrypt('password')
+            'password' => bcrypt('password'),
+            'color' => 'blue',
+            'boyfriend' => 'yes'
         ]);
 
         User::factory()->create([
@@ -29,7 +31,9 @@ class UserSeeder extends Seeder
             'NRC' => '7/PAMANA(N)9876543',
             'type' => 'admin',
             'email' => 'mama@admin.com',
-            'password' => bcrypt('password')
+            'password' => bcrypt('password'),
+            'color' => 'blue',
+            'boyfriend' => 'yes'
         ]);
 
         User::factory()->create([
@@ -39,7 +43,9 @@ class UserSeeder extends Seeder
             'NRC' => '7/PAMANA(N)345678',
             'type' => 'admin',
             'email' => 'thaethae@admin.com',
-            'password' => bcrypt('password')
+            'password' => bcrypt('password'),
+            'color' => 'blue',
+            'boyfriend' => 'yes'
         ]);
     }
 }

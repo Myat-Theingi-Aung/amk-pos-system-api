@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Sale;
+use App\Models\Payment;
+use App\Http\Resources\PaymentResource;
 use App\Http\Requests\PaymentCreateRequest;
 use App\Http\Requests\PaymentUpdateRequest;
-use App\Http\Resources\PaymentResource;
-use App\Models\Payment;
-use App\Models\Sale;
-use App\Models\Product;
-use App\Models\Category;
-use App\Models\CategoryType;
 
 class PaymentController extends Controller
 {
@@ -27,24 +23,15 @@ class PaymentController extends Controller
      */
     public function store(PaymentCreateRequest $request)
     {
-
-        $payment = Payment::create($request->all());
-
-        $userSales = Sale::where('user_id', $request->input('user_id'))->get();
-
-        $foundCategoryType = $this->checkForCategoryType($userSales, $request["category_type_id"]);
+        $sales = Sale::where('user_id', $request->user_id)->with('saleItems.product.category.categoryType')->get();
+        $foundCategoryType = $this->checkForCategoryType($sales, $request->category_type_id);
 
         if (!$foundCategoryType) {
-
-            return response()->json(['error' => 'Category type not found in sales.'], 422);
-
+            return response()->json(['error' => 'User not buy this category type items'], 401);
         }
-        else
-        {
 
-            return response()->json(['message' => 'Payment created successfully','category' =>  new PaymentResource($payment)]);
-
-        }
+        $payment = Payment::create($request->all());
+        return response()->json(['message' => 'Payment created successfully','category' =>  new PaymentResource($payment)]);
     }
 
     /**
@@ -60,24 +47,15 @@ class PaymentController extends Controller
      */
     public function update(PaymentUpdateRequest $request, Payment $payment)
     {
-        $payment->update($request->all());
-
-        $userSales = Sale::where('user_id', $request->input('user_id'))->get();
-
-        $foundCategoryType = $this->checkForCategoryType($userSales, $request["category_type_id"]);
+        $sales = Sale::where('user_id', $request->user_id)->with('saleItems.product.category.categoryType')->get();
+        $foundCategoryType = $this->checkForCategoryType($sales, $request->category_type_id);
 
         if (!$foundCategoryType) {
-
-            return response()->json(['error' => 'Category type not found in sales.'], 422);
-
-        }
-        else
-        {
-
-            return response()->json(['message' => 'Payment updated successfully','category' =>  new PaymentResource($payment)]);
-
+            return response()->json(['error' => 'User not buy this category type items'], 401);
         }
 
+        $payment->update($request->all());
+        return response()->json(['message' => 'Payment updated successfully','category' =>  new PaymentResource($payment)]);
     }
 
     /**
@@ -90,23 +68,12 @@ class PaymentController extends Controller
         return response()->json(['message' => 'Payment deleted successfully']);
     }
 
-    private function checkForCategoryType($sales, $requestCategoryTypeId) {
+    private function checkForCategoryType($sales, $requestCategoryTypeId) 
+    {
+        $requestedCategoryTypeIds = $sales->flatMap(function ($sale) {
+            return $sale->saleItems->pluck('product.category.categoryType.id');
+        })->unique();
 
-        foreach ($sales as $sale) {
-
-            foreach ($sale->saleItems as $saleItem) {
-
-                $product = Product::find($saleItem->product_id);
-
-                if ($product && ($category = Category::find($product->category_id)) && ($categoryType = CategoryType::find($category->category_type_id)) && $categoryType->id == $requestCategoryTypeId) {
-
-                    return true;
-
-                }
-            }
-        }
-
-        return false;
+        return $requestedCategoryTypeIds->contains($requestCategoryTypeId);
     }
-
 }

@@ -23,7 +23,7 @@ class SaleItemSeeder extends Seeder
         ]);
 
         SaleItem::create([
-            'sale_id' => 2,
+            'sale_id' => 1,
             'product_id' => 2,
             'quantity' => 1,
             'price' => 100000,

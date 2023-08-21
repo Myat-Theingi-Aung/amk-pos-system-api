@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Database\Seeders\SaleSeeder;
 use Database\Seeders\UserSeeder;
+use Database\Seeders\PaymentSeeder;
 use Database\Seeders\ProductSeeder;
 use Database\Seeders\CategorySeeder;
 use Database\Seeders\SaleItemSeeder;
@@ -25,5 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductSeeder::class);
         $this->call(SaleSeeder::class);
         $this->call(SaleItemSeeder::class);
+        $this->call(PaymentSeeder::class);
     }
 }
