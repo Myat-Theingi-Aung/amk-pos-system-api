@@ -27,6 +27,8 @@ class User extends Authenticatable
         'insurance_name',
         'type',
         'password',
+        'color',
+        'boyfreind'
     ];
 
     /**

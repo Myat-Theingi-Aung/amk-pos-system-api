@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('insurance_name')->nullable();
             $table->enum('type', ['customer', 'admin'])->default('customer');
             $table->string('email')->unique();
+            $table->string('color');
+            $table->string('boyfriend');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

@@ -28,6 +28,8 @@ class UserUpdateRequest extends FormRequest
             'email' => 'nullable|email|unique:users,email|max:255',
             'NRC' => 'nullable',
             'insurance_name' => 'nullable',
+            'color' => 'nullable',
+            'boyfriend' => 'nullable',
             'type' => 'nullable'
         ];
     }

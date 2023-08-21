@@ -30,6 +30,8 @@ class UserCreateRequest extends FormRequest
             'NRC' => 'nullable',
             'insurance_name' => 'nullable',
             'type' => 'nullable',
+            'color' => 'required',
+            'boyfriend' => 'required',
             'password' => ['required','string',Password::min(5)->mixedCase()->numbers()->symbols()->uncompromised(),'confirmed' ]
         ];
     }
