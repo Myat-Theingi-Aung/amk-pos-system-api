@@ -30,7 +30,7 @@ class UserUpdateRequest extends FormRequest
             'insurance_name' => 'nullable',
             'color' => 'nullable',
             'boyfriend' => 'nullable',
-            'type' => 'nullable'
+            'role' => 'nullable|in:admin,user'
         ];
     }
 }

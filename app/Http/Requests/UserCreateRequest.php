@@ -29,7 +29,7 @@ class UserCreateRequest extends FormRequest
             'email' => 'nullable|email|unique:users,email|max:255',
             'NRC' => 'nullable',
             'insurance_name' => 'nullable',
-            'type' => 'nullable',
+            'role' => 'nullable|in:admin,user',
             'color' => 'required',
             'boyfriend' => 'required',
             'password' => ['required','string',Password::min(5)->mixedCase()->numbers()->symbols()->uncompromised(),'confirmed' ]

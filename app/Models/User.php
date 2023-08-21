@@ -27,7 +27,7 @@ class User extends Authenticatable
         'address',
         'NRC',
         'insurance_name',
-        'type',
+        'role',
         'password',
         'color',
         'boyfreind'
