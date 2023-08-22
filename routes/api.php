@@ -1,26 +1,30 @@
 <?php
 
+use App\Http\Middleware\RoleChecker;
+use App\Http\Middleware\PreventRoute;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategoryTypeController;
-use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SaleItemController;
-use App\Http\Middleware\RoleChecker;
+use App\Http\Controllers\CategoryTypeController;
+use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\ForgotPasswordController;
 
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/register', [UserController::class, 'store']);
-Route::post('/forgot', [ForgotPasswordController::class, 'forgot']);
-Route::post('/reset/{user}', [ResetPasswordController::class, 'reset']);
+Route::middleware([PreventRoute::class])->group(function () {
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/register', [UserController::class, 'store']);
+    Route::post('/forgot', [ForgotPasswordController::class, 'forgot']);
+    Route::post('/reset/{user}', [ResetPasswordController::class, 'reset']);
+});
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::middleware([RoleChecker::class . ':admin'])->group(function () {
         Route::get('/users', [ UserController::class, 'index' ]);
+        Route::post('/users/create', [UserController::class, 'store']);
         Route::delete('/users/{user}', [ UserController::class, 'destroy' ]);
 
         Route::get('/category_types', [CategoryTypeController::class, 'index']);

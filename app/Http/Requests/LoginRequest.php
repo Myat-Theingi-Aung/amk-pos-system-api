@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequest extends FormRequest
@@ -24,7 +23,7 @@ class LoginRequest extends FormRequest
     {
         return [
             'phone' => ['required', 'regex:/^(09-|01-|\+?959-)\d{9}$/'],
-            'password' => ['required' ]
+            'password' => ['required']
         ];
     }
 }
