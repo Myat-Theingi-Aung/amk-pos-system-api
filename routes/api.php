@@ -16,7 +16,7 @@ use App\Http\Middleware\RoleChecker;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [UserController::class, 'store']);
 Route::post('/forgot', [ForgotPasswordController::class, 'forgot']);
-Route::post('/reset', [ResetPasswordController::class, 'reset']);
+Route::post('/reset/{user}', [ResetPasswordController::class, 'reset']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::middleware([RoleChecker::class . ':admin'])->group(function () {

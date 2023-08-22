@@ -30,7 +30,9 @@ class User extends Authenticatable
         'role',
         'password',
         'color',
-        'food'
+        'food',
+        'token_expiry',
+        'reset_token'
     ];
 
     /**
