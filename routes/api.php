@@ -6,13 +6,17 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryTypeController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SaleItemController;
 use App\Http\Middleware\RoleChecker;
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [UserController::class, 'store']);
+Route::post('/forgot', [ForgotPasswordController::class, 'forgot']);
+Route::post('/reset', [ResetPasswordController::class, 'reset']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::middleware([RoleChecker::class . ':admin'])->group(function () {

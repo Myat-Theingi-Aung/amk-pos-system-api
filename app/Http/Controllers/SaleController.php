@@ -8,7 +8,6 @@ use App\Models\SaleItem;
 use App\Http\Resources\SaleResource;
 use App\Http\Requests\SaleCreateRequest;
 use App\Http\Requests\SaleUpdateRequest;
-use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
 class SaleController extends Controller
 {
