@@ -16,6 +16,7 @@ git clone https://github.com/Myat-Theingi-Aung/AMK-POS-system.git
 composer install
 cp .env.example .env
 php artisan key:generate
+php artisan storage:link
 composer require --with-all-dependencies league/flysystem-aws-s3-v3
 ```
 

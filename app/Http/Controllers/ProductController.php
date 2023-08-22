@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\File;
 use App\Http\Resources\ProductResource;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ProductCreateRequest;
@@ -33,9 +34,23 @@ class ProductController extends Controller
     {
         $product = Product::create($request->all());
 
-        if($request->hasFile('image')){
-            $path = $request->file('image')->store('images', 's3', 'public');
-            $product->update([ 'image' => basename($path) ]);
+        // Store in amazon s3
+        // if($request->hasFile('image')){
+        //     $path = $request->file('image')->store('images', 's3', 'public');
+        //     $product->update([ 'image' => basename($path) ]);
+        // }
+
+        // Create the directory if it doesn't exist
+        $path = storage_path('app/public/images/');
+        if (!is_dir($path)) {
+            mkdir($path, 0777, true);
+        }
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = uniqid() . '-' . $file->getClientOriginalName();
+            $file->storeAs('public/images', $fileName);
+            $product->update(['image' => $fileName]);
         }
 
         return response()->json(['message' => 'Product created successfully','product' =>  new ProductResource($product)]);
@@ -54,13 +69,22 @@ class ProductController extends Controller
     */
     public function update(ProductUpdateRequest $request, Product $product)
     {
-        if($request->hasFile('image')){
-            $product->image ? $imagePath = 'images/' . $product->image : '';
-            if(!is_null($imagePath) && Storage::disk('s3')->exists($imagePath)){
-                Storage::disk('s3')->delete($imagePath);
-            }
-            $path = $request->file('image')->store('images', 's3', 'public');
-            $product->update( ['image' => basename($path)] );
+        // Store in amazon s3
+        // if($request->hasFile('image')){
+        //     $product->image ? $imagePath = 'images/' . $product->image : '';
+        //     if(!is_null($imagePath) && Storage::disk('s3')->exists($imagePath)){
+        //         Storage::disk('s3')->delete($imagePath);
+        //     }
+        //     $path = $request->file('image')->store('images', 's3', 'public');
+        //     $product->update( ['image' => basename($path)] );
+        // }
+
+        if ($request->hasFile('image')) {
+            Storage::delete('public/images/' . $product->image);
+            $file = $request->file('image');
+            $fileName = uniqid() . '-' . $file->getClientOriginalName();
+            $file->storeAs('public/images', $fileName);
+            $product->update(['image' => $fileName]);
         }
         $product->update(Arr::except($request->except('image'), ['image']));
 
@@ -72,6 +96,9 @@ class ProductController extends Controller
     */
     public function destroy(Product $product)
     {
+        if ($product->image != null) {
+            Storage::delete('public/images/' . $product->image);
+        }
         $product->delete();
 
         return response()->json(['message' => 'Product deleted successfully']);

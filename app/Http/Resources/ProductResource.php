@@ -19,7 +19,7 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'image' => $this->image,
-            'image_from_s3' => is_null($this->image) ? null : Storage::disk('s3')->url('images/' . $this->image),
+            // 'image_from_s3' => is_null($this->image) ? null : Storage::disk('s3')->url('images/' . $this->image),
             'category_id' => $this->category_id,
             'price' => $this->price,
             'quantity' => $this->quantity,
