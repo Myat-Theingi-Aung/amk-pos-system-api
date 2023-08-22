@@ -30,7 +30,7 @@ class User extends Authenticatable
         'role',
         'password',
         'color',
-        'boyfreind'
+        'food'
     ];
 
     /**

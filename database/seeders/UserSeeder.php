@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => bcrypt('password'),
             'color' => 'blue',
-            'boyfriend' => 'yes'
+            'food' => 'bubble tea'
         ]);
 
         User::factory()->create([
@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
             'email' => 'mama@admin.com',
             'password' => bcrypt('password'),
             'color' => 'blue',
-            'boyfriend' => 'yes'
+            'food' => 'colar'
         ]);
 
         User::factory()->create([
@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
             'email' => 'thaethae@admin.com',
             'password' => bcrypt('password'),
             'color' => 'blue',
-            'boyfriend' => 'yes'
+            'food' => 'pizza'
         ]);
     }
 }

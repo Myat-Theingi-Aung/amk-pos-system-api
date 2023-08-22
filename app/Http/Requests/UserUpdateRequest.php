@@ -22,14 +22,14 @@ class UserUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'nullable|string|max:255',
-            'phone' => ['nullable', 'regex:/^(09-|01-|\+?959-)\d{9}$/'],
-            'address' => 'nullable|string|max:255',
+            'name' => 'required|string|max:255',
+            'phone' => ['required', 'regex:/^(09-|01-|\+?959-)\d{9}$/'],
+            'address' => 'required|string|max:255',
             'email' => 'nullable|email|unique:users,email|max:255',
             'NRC' => 'nullable',
             'insurance_name' => 'nullable',
-            'color' => 'nullable',
-            'boyfriend' => 'nullable',
+            'color' => 'required',
+            'food' => 'required',
             'role' => 'nullable|in:admin,user'
         ];
     }

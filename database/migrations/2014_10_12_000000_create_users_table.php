@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('role', ['user', 'admin'])->default('user');
             $table->string('email')->unique();
             $table->string('color');
-            $table->string('boyfriend');
+            $table->string('food');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

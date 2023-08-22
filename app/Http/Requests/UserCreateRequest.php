@@ -31,7 +31,7 @@ class UserCreateRequest extends FormRequest
             'insurance_name' => 'nullable',
             'role' => 'nullable|in:admin,user',
             'color' => 'required',
-            'boyfriend' => 'required',
+            'food' => 'required',
             'password' => ['required','string',Password::min(5)->mixedCase()->numbers()->symbols()->uncompromised(),'confirmed' ]
         ];
     }
