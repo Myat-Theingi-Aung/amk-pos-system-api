@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\UserPasswordChangeRequest;
 
 class UserController extends Controller
 {
@@ -65,5 +66,12 @@ class UserController extends Controller
         $user->delete();
 
         return response()->json(['message' => 'User deleted successfully']);
+    }
+
+    public function changePassword(UserPasswordChangeRequest $request, User $user)
+    {
+        $user->update($request->all());
+
+        return response()->json(['message' => 'Password changed successfully']);
     }
 }

@@ -64,6 +64,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/users/{user}', [ UserController::class, 'show' ]);
     Route::put('/users/{user}', [ UserController::class, 'update' ]);
+    Route::post('/users/change/password/{user}', [ UserController::class, 'changePassword' ]);
 
     Route::get('/products', [ProductController::class, 'index']);
     Route::get('/products/{product}', [ProductController::class, 'show']);
