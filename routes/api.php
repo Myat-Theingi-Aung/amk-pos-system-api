@@ -13,6 +13,7 @@ use App\Http\Controllers\SaleItemController;
 use App\Http\Controllers\CategoryTypeController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Middleware\PreventOtherUserAccess;
 
 Route::middleware([PreventRoute::class])->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
@@ -62,15 +63,17 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/payments/{payment}', [PaymentController::class, 'destroy']);
     });
 
-    Route::get('/users/{user}', [ UserController::class, 'show' ]);
-    Route::put('/users/{user}', [ UserController::class, 'update' ]);
-    Route::post('/users/change/password/{user}', [ UserController::class, 'changePassword' ]);
+    Route::middleware([PreventOtherUserAccess::class])->group(function (){
+        Route::get('/users/{user}', [ UserController::class, 'show' ]);
+        Route::put('/users/{user}', [ UserController::class, 'update' ]);
+        Route::post('/users/change/password/{user}', [ UserController::class, 'changePassword' ]);
 
-    Route::get('/products', [ProductController::class, 'index']);
-    Route::get('/products/{product}', [ProductController::class, 'show']);
+        Route::get('/products', [ProductController::class, 'index']);
+        Route::get('/products/{product}', [ProductController::class, 'show']);
 
-    Route::get('/sales/{user}/user', [SaleController::class, 'userSale']);
-    Route::get('/payments/{user}/user', [PaymentController::class, 'userPayment']);
+        Route::get('/sales/{user}/user', [SaleController::class, 'userSale']);
+        Route::get('/payments/{user}/user', [PaymentController::class, 'userPayment']);
+    });
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });
