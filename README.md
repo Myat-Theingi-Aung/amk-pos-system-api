@@ -41,6 +41,13 @@ AWS_BUCKET=
 AWS_USE_PATH_STYLE_ENDPOINT=
 ```
 
+Frontend configure (not use aws)
+```
+FRONTEND_URL=
+SESSION_DOMAIN=
+SANCTUM_STATEFUL_DOMAINS=
+```
+
 ## Database Migration
 
 Run database migrations:
