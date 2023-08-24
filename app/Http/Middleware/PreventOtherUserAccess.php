@@ -22,7 +22,7 @@ class PreventOtherUserAccess
             $requestedUserId = $request->route('user')->id;
         
             if ($loggedInUser->id != $requestedUserId) {
-                return response()->json('Unauthorized');
+                return response()->json(['error' => 'Not Found'], 404);
             }
         }
         return $next($request);
