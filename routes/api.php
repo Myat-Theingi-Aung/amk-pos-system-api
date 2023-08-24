@@ -55,7 +55,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/sale_items/{saleItem}', [SaleItemController::class, 'show']);
         Route::put('/sale_items/{saleItem}', [SaleItemController::class, 'update']);
         Route::delete('/sale_items/{saleItem}', [SaleItemController::class, 'destroy']);
-        
+
         Route::get('/payments', [PaymentController::class, 'index']);
         Route::post('/payments', [PaymentController::class, 'store']);
         Route::get('/payments/{payment}', [PaymentController::class, 'show']);
@@ -68,12 +68,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/users/{user}', [ UserController::class, 'update' ]);
         Route::post('/users/change/password/{user}', [ UserController::class, 'changePassword' ]);
 
-        Route::get('/products', [ProductController::class, 'index']);
-        Route::get('/products/{product}', [ProductController::class, 'show']);
-
         Route::get('/sales/{user}/user', [SaleController::class, 'userSale']);
         Route::get('/payments/{user}/user', [PaymentController::class, 'userPayment']);
     });
+
+    Route::get('/products', [ProductController::class, 'index']);
+    Route::get('/products/{product}', [ProductController::class, 'show']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
-
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CategoryTypeUpdateRequest extends FormRequest
@@ -21,8 +21,9 @@ class CategoryTypeUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $categoryTypeId = $this->route('category_type')->id;
         return [
-            'name' => 'required|string|max:255'
+            'name' => ['required', 'string', 'max:255', Rule::unique('category_types', 'name')->ignore($categoryTypeId)]
         ];
     }
 }

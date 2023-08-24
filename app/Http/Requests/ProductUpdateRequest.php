@@ -23,8 +23,9 @@ class ProductUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $productId = $this->route('product')->id;
         return [
-            'name' => 'required',
+            'name' => ['required', Rule::unique('products', 'name')->ignore($productId)],
             'category_id' => ['required', Rule::exists(Category::class, 'id')],
             'image' => 'nullable|mimes:jpeg,png,jpg,jfif',
             'price' => 'required|regex:/[0-9]/|min:3|max:10',

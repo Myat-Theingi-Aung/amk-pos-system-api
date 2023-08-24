@@ -24,7 +24,7 @@ class ProductCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:products,name',
             'category_id' => ['required', Rule::exists(Category::class, 'id')],
             'image' => 'nullable|mimes:jpeg,png,jpg,jfif',
             'price' => 'required|regex:/[0-9]/|min:3|max:10',
