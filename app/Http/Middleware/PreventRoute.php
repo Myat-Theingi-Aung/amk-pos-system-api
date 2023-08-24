@@ -17,7 +17,7 @@ class PreventRoute
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::guard('sanctum')->check()) {
-            return response()->json("login user not see this route");
+            return response()->json(['error' => 'Redirect Route'], 401);
         }
         
         return $next($request);
