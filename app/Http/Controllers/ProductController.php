@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\File;
+// use Illuminate\Support\Facades\File;
 use App\Http\Resources\ProductResource;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ProductCreateRequest;
