@@ -18,14 +18,14 @@ class AuthController extends Controller
         $user = User::where('phone', $request->phone)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return response()->json(['message' => 'Phone number or password is incorrect!'], 401);
+            return response()->json(['error' => 'Phone number or password is incorrect!'], 422);
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
         $cookie = cookie('token', $token, 60 * 24); // 1 day
 
-        return response()->json(['messate' => 'Login Successfully!','user' => new UserResource($user)])->withCookie($cookie);
+        return response()->json(['message' => 'Login Successfully!','user' => new UserResource($user)])->withCookie($cookie);
     }
 
     /**
