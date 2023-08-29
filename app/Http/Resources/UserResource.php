@@ -24,6 +24,7 @@ class UserResource extends JsonResource
             'insurance_name' => $this->insurance_name,
             'role' => $this->role,
             'color' => $this->color,
+            'food' => $this->food,
             'boyfriend' => $this->boyfriend,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
