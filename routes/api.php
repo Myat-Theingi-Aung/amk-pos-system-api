@@ -17,7 +17,6 @@ use App\Http\Middleware\PreventOtherUserAccess;
 
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{product}', [ProductController::class, 'show']);
-
 Route::middleware([PreventRoute::class])->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [UserController::class, 'store']);
@@ -42,7 +41,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/categories/{category}', [CategoryController::class, 'show']);
         Route::put('/categories/{category}', [CategoryController::class, 'update']);
         Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
-        
+
         Route::post('/products', [ProductController::class, 'store']);
         Route::put('/products/{product}', [ProductController::class, 'update']);
         Route::delete('/products/{product}', [ProductController::class, 'destroy']);
@@ -69,11 +68,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware([PreventOtherUserAccess::class])->group(function (){
         Route::get('/users/{user}', [ UserController::class, 'show' ]);
         Route::put('/users/{user}', [ UserController::class, 'update' ]);
+        Route::post('/confirm/oldPassword/{user}', [ UserController::class, 'confirmOldPassword' ]);
         Route::post('/users/change/password/{user}', [ UserController::class, 'changePassword' ]);
-
         Route::get('/sales/{user}/user', [SaleController::class, 'userSale']);
         Route::get('/payments/{user}/user', [PaymentController::class, 'userPayment']);
     });
+
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });

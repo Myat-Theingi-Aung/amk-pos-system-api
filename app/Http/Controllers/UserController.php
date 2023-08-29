@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Requests\UserPasswordChangeRequest;
+use App\Http\Requests\OldPasswordRequest;
 
 class UserController extends Controller
 {
@@ -66,6 +69,16 @@ class UserController extends Controller
         $user->delete();
 
         return response()->json(['message' => 'User deleted successfully']);
+    }
+
+    public function confirmOldPassword(User $user, OldPasswordRequest $request)
+    {
+        if (!Hash::check($request->password, $user->password))
+        {
+            return response()->json(['error' => 'Old Password Confirmation Failed']);
+        }
+
+        return response()->json(['message' => 'Old Password Confirmation Successful']);
     }
 
     public function changePassword(UserPasswordChangeRequest $request, User $user)
