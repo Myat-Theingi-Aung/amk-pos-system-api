@@ -17,6 +17,7 @@ use App\Http\Middleware\PreventOtherUserAccess;
 
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{product}', [ProductController::class, 'show']);
+
 Route::middleware([PreventRoute::class])->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [UserController::class, 'store']);

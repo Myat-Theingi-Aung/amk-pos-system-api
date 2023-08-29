@@ -75,7 +75,7 @@ class UserController extends Controller
     {
         if (!Hash::check($request->password, $user->password))
         {
-            return response()->json(['error' => 'Old Password Confirmation Failed']);
+            return response()->json(['error' => 'Old Password Confirmation Failed'], 401);
         }
 
         return response()->json(['message' => 'Old Password Confirmation Successful']);
