@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['http://localhost:3000'], // အတိအကျပေးတာပိုကောင်းတယ် မပေးချင်ရငိ * သုံးလို့လဲရတယ်
 
     'allowed_origins_patterns' => [],
 

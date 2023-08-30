@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('NRC')->nullable();
             $table->string('insurance_name')->nullable();
             $table->enum('role', ['user', 'admin'])->default('user');
-            $table->string('email')->unique()->nullable();
+            $table->string('email')->unique()->default('')->nullable(false);
             $table->string('color');
             $table->string('food');
             $table->timestamp('email_verified_at')->nullable();

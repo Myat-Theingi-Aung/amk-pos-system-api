@@ -73,7 +73,7 @@ class PaymentController extends Controller
     {
         $payments = Payment::where('user_id', $user->id)->get();
 
-        return response()->json($payments);
+        return response()->json(['payments' => $payments]);
     }
 
     private function checkForCategoryType($sales, $requestCategoryTypeId) 

@@ -24,7 +24,7 @@ class ProductController extends Controller
                   ->orWhere('quantity', 'like', $search);
             })->orderBy('id','desc')->get();
 
-        return ProductResource::collection($products);
+        return response()->json(['products' => ProductResource::collection($products)]);
     }
 
     /**

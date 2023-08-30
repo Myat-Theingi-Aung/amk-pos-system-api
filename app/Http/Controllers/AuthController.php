@@ -25,7 +25,7 @@ class AuthController extends Controller
 
         $cookie = cookie('token', $token, 60 * 24); // 1 day
 
-        return response()->json(['message' => 'Login Successfully!','user' => new UserResource($user)])->withCookie($cookie);
+        return response()->json(['message' => 'Login Successfully!','user' => new UserResource($user), 'token' => $token])->withCookie($cookie);
     }
 
     /**

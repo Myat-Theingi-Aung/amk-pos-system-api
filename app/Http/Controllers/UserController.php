@@ -40,7 +40,7 @@ class UserController extends Controller
 
         $cookie = cookie('token', $token, 60 * 24); // 1 day
 
-        return response()->json(['message' => 'User created successfully','user' => new UserResource($user)])->withCookie($cookie);
+        return response()->json(['message' => 'User created successfully','user' => new UserResource($user), 'token' => $token])->withCookie($cookie);
     }
 
     /**
@@ -73,6 +73,7 @@ class UserController extends Controller
 
     public function confirmOldPassword(User $user, OldPasswordRequest $request)
     {
+        info('confirm old password');
         if (!Hash::check($request->password, $user->password))
         {
             return response()->json(['error' => 'Old Password Confirmation Failed'], 401);

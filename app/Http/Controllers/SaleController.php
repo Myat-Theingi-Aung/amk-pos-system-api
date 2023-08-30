@@ -99,6 +99,6 @@ class SaleController extends Controller
     {
        $sales = Sale::where('user_id', $user->id)->with('saleItems')->get();
 
-        return response()->json(["success",$sales]);
+        return response()->json(['message' => 'success', 'sales' => $sales]);
     }
 }
