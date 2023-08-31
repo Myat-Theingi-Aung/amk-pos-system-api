@@ -25,8 +25,8 @@ class SaleItemCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'sale_id' => ['required', Rule::exists(Sale::class, 'id')],
-            'product_id' => ['required', Rule::exists(Product::class, 'id')],
+            'sale_id' => ['required', Rule::exists(Sale::class, 'id')->whereNull('deleted_at')],
+            'product_id' => ['required', Rule::exists(Product::class, 'id')->whereNull('deleted_at')],
             'price' => 'required',
             'quantity' => 'required',
             'payment_start_period' => 'required', 'date_format:Y-m-d',

@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Database\Seeders\SaleSeeder;
 use Database\Seeders\UserSeeder;
+use Database\Seeders\ColorSeeder;
 use Database\Seeders\PaymentSeeder;
 use Database\Seeders\ProductSeeder;
 use Database\Seeders\CategorySeeder;
@@ -29,5 +30,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SaleItemSeeder::class);
         $this->call(PaymentSeeder::class);
         $this->call(DeleteImageSeeder::class);
+        $this->call(ColorSeeder::class);
     }
 }

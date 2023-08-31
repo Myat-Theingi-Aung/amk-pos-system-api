@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Color;
 use App\Models\Category;
+use App\Rules\ValidColorIds;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,12 +25,14 @@ class ProductCreateRequest extends FormRequest
      */
     public function rules(): array
     {
+        info(Color::all());
         return [
-            'name' => 'required|string|max:255|unique:products,name',
-            'category_id' => ['required', Rule::exists(Category::class, 'id')],
+            'name' => ['required', 'string', 'max:255', Rule::unique('products', 'name')->whereNull('deleted_at')],
+            'category_id' => ['required', Rule::exists(Category::class, 'id')->whereNull('deleted_at')],
             'image' => 'nullable|mimes:jpeg,png,jpg,jfif',
             'price' => 'required|regex:/[0-9]/|min:3|max:10',
             'quantity' => 'required',
+            'colors' => ['required', new ValidColorIds]
         ];
     }
 

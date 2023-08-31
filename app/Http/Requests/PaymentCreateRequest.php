@@ -25,8 +25,8 @@ class PaymentCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required', Rule::exists(User::class, 'id')],
-            'category_type_id' => ['required', Rule::exists(CategoryType::class,'id')],
+            'user_id' => ['required', Rule::exists(User::class, 'id')->whereNull('deleted_at')],
+            'category_type_id' => ['required', Rule::exists(CategoryType::class,'id')->whereNull('deleted_at')],
             'amount' => ['required'],
             'date' => ['required', 'date_format:Y-m-d']
         ];

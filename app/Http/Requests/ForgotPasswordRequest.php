@@ -24,7 +24,7 @@ class ForgotPasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'phone' => ['required', Rule::exists(User::class, 'phone')],
+            'phone' => ['required', Rule::exists(User::class, 'phone')->whereNull('deleted_at')],
             'color' => ['required'],
             'food' => ['required']
         ];

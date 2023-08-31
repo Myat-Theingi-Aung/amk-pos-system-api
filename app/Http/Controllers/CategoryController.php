@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return CategoryResource::collection(Category::all());
+        return response()->json(['categories' => CategoryResource::collection(Category::all())]);
     }
 
     /**
@@ -32,7 +32,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return new CategoryResource($category);
+        return response()->json(['category' => new CategoryResource($category)]);
     }
 
     /**

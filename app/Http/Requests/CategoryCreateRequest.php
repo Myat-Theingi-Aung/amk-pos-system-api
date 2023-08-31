@@ -25,7 +25,7 @@ class CategoryCreateRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255|unique:categories,name',
-            'category_type_id' => ['required', Rule::exists(CategoryType::class, 'id')]
+            'category_type_id' => ['required', Rule::exists(CategoryType::class, 'id')->whereNull('deleted_at')]
         ];
     }
 

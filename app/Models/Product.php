@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Color;
 use App\Models\Category;
 use App\Models\SaleItem;
 use Illuminate\Database\Eloquent\Model;
@@ -33,5 +34,10 @@ class Product extends Model
     public function saleItems()
     {
         return $this->hasMany(SaleItem::class);
+    }
+
+    public function colors()
+    {
+        return $this->belongsToMany(Color::class, 'product_colors');
     }
 }

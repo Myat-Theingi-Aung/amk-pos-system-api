@@ -23,7 +23,7 @@ class CategoryTypeUpdateRequest extends FormRequest
     {
         $categoryTypeId = $this->route('category_type')->id;
         return [
-            'name' => ['required', 'string', 'max:255', Rule::unique('category_types', 'name')->ignore($categoryTypeId)]
+            'name' => ['required', 'string', 'max:255', Rule::unique('category_types', 'name')->whereNull('deleted_at')->ignore($categoryTypeId)]
         ];
     }
 }

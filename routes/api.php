@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SaleItemController;
 use App\Http\Controllers\CategoryTypeController;
+use App\Http\Controllers\ColorController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Middleware\PreventOtherUserAccess;
@@ -49,6 +50,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/categories/{category}', [CategoryController::class, 'show']);
         Route::put('/categories/{category}', [CategoryController::class, 'update']);
         Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
+
+        Route::get('/colors', [ColorController::class, 'index']);
+        Route::post('/colors', [ColorController::class, 'store']);
+        Route::get('/colors/{color}', [ColorController::class, 'show']);
+        Route::put('/colors/{color}', [ColorController::class, 'update']);
+        Route::delete('/colors/{color}', [ColorController::class, 'destroy']);
 
         Route::post('/products', [ProductController::class, 'store']);
         Route::put('/products/{product}', [ProductController::class, 'update']);

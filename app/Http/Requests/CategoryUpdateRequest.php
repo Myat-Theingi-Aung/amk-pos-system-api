@@ -25,8 +25,8 @@ class CategoryUpdateRequest extends FormRequest
     {
         $categoryId = $this->route('category')->id;
         return [
-            'name' => ['required', 'max:255', Rule::unique('categories', 'name')->ignore($categoryId)],
-            'category_type_id' => ['required', Rule::exists(CategoryType::class, 'id')]
+            'name' => ['required', 'max:255', Rule::unique('categories', 'name')->whereNull('deleted_at')->ignore($categoryId)],
+            'category_type_id' => ['required', Rule::exists(CategoryType::class, 'id')->whereNull('deleted_at')]
         ];
     }
 

@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Requests;
-use App\Models\User;
-use App\Models\CategoryType;
+
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class PaymentUpdateRequest extends FormRequest
+class ColorCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +23,8 @@ class PaymentUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required', Rule::exists(User::class, 'id')->whereNull('deleted_at')],
-            'category_type_id' => ['required', Rule::exists(CategoryType::class,'id')->whereNull('deleted_at')],
-            'amount' => ['required'],
-            'date' => ['required', 'date_format:Y-m-d']
+            'name' => ['required', Rule::unique('colors', 'name')->whereNull('deleted_at')],
+            'code' => ['required', Rule::unique('colors', 'code')->whereNull('deleted_at')]
         ];
     }
 }

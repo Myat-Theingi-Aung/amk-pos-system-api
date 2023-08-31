@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CategoryTypeCreateRequest extends FormRequest
@@ -22,7 +23,7 @@ class CategoryTypeCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|unique:category_types,name|max:255'
+            'name' => ['required','string','max:255', Rule::unique('category_types', 'name')->whereNull('deleted_at')]
         ];
     }
 }

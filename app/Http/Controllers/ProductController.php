@@ -53,6 +53,11 @@ class ProductController extends Controller
             $product->update(['image' => $fileName]);
         }
 
+        $colorIds = json_decode($request['colors']);
+        foreach($colorIds as $color) {
+            $product->colors()->attach($color);
+        }
+
         return response()->json(['message' => 'Product created successfully','product' =>  new ProductResource($product)]);
     }
 
@@ -88,6 +93,12 @@ class ProductController extends Controller
         }
         $product->update(Arr::except($request->except('image'), ['image']));
 
+        $product->colors()->detach();
+        $colorIds = json_decode($request['colors']);
+        foreach($colorIds as $color) {
+            $product->colors()->attach($color);
+        }
+
         return response()->json(['message' => 'Product updated successfully','product' =>  new ProductResource($product)]);  
     }
 
@@ -99,6 +110,9 @@ class ProductController extends Controller
         if ($product->image != null) {
             Storage::delete('public/images/' . $product->image);
         }
+
+        $product->colors()->update(['product_colors.deleted_at' => now()]);
+
         $product->delete();
 
         return response()->json(['message' => 'Product deleted successfully']);

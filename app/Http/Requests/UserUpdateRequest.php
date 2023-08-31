@@ -25,9 +25,9 @@ class UserUpdateRequest extends FormRequest
         $userId = $this->route('user')->id;
         return [
             'name' => 'required|string|max:255',
-            'phone' => ['required', 'regex:/^(09-|01-|\+?959-)\d{9}$/', Rule::unique('users', 'phone')->ignore($userId)],
+            'phone' => ['required', 'regex:/^(09-|01-|\+?959-)\d{9}$/', Rule::unique('users', 'phone')->whereNull('deleted_at')],
             'address' => 'required|string|max:255',
-            'email' => 'nullable|email|unique:users,email|max:255',
+            'email' => ['nullable', 'email', 'max:255', Rule::unique('users', 'email')->whereNull('deleted_at')],
             'NRC' => 'nullable',
             'insurance_name' => 'nullable',
             'color' => 'required',
