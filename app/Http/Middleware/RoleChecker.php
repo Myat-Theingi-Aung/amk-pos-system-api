@@ -14,12 +14,14 @@ class RoleChecker
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $adminRole): Response
+    public function handle(Request $request, Closure $next, $requestRole)
     {
-        $roles = Auth::check() ? [Auth::user()->role] : [];
+        $role = Auth::check() ? Auth::user()->role->value : '';
+        $requestRoles = explode("|", $requestRole);
 
-        if (!in_array($adminRole, $roles)) {
-            return response('Unauthorized', 401);
+        if (!in_array($role, $requestRoles))
+        {
+            return response()->json(['roleChecker' => 'Unauthorized'], 401);
         }
 
         return $next($request);

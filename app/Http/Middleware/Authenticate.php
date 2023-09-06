@@ -11,7 +11,7 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request): ?string
     {
-        return $request->expectsJson() ? null : route('login');
+        return $request->expectsJson() ? null : response()->json(["redirect to login"], 301);
     }
 
     public function handle($request, Closure $next, ...$guards)

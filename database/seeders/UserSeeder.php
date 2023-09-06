@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UserRole;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -17,7 +18,7 @@ class UserSeeder extends Seeder
             'phone' => '09-987654321',
             'address' => 'Pyay',
             'NRC' => '7/PAMANA(N)123456',
-            'role' => 'admin',
+            'role' => UserRole::Admin,
             'email' => 'admin@admin.com',
             'password' => bcrypt('password'),
             'color' => 'blue',
@@ -29,7 +30,7 @@ class UserSeeder extends Seeder
             'phone' => '09-981234567',
             'address' => 'Pyay',
             'NRC' => '7/PAMANA(N)9876543',
-            'role' => 'admin',
+            'role' => UserRole::Admin,
             'email' => 'mama@admin.com',
             'password' => bcrypt('password'),
             'color' => 'blue',
@@ -41,7 +42,7 @@ class UserSeeder extends Seeder
             'phone' => '09-987876543',
             'address' => 'Pyay',
             'NRC' => '7/PAMANA(N)345678',
-            'role' => 'admin',
+            'role' => UserRole::Admin,
             'email' => 'thaethae@admin.com',
             'password' => bcrypt('password'),
             'color' => 'blue',
