@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Sale;
+use App\Enums\UserRole;
 use App\Models\Payment;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -27,12 +28,12 @@ class User extends Authenticatable
         'address',
         'NRC',
         'insurance_name',
-        'role',
         'password',
         'color',
         'food',
         'token_expiry',
-        'reset_token'
+        'reset_token',
+        'google_id'
     ];
 
     /**
@@ -53,6 +54,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'role' => UserRole::class
     ];
 
     public function sales()

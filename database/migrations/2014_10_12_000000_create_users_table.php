@@ -18,7 +18,8 @@ return new class extends Migration
             $table->text('address');
             $table->string('NRC')->nullable();
             $table->string('insurance_name')->nullable();
-            $table->enum('role', ['user', 'admin'])->default('user');
+            // $table->enum('role', ['user', 'admin'])->default('user');
+            $table->string('role')->default('user');
             $table->string('email')->nullable();
             $table->string('color');
             $table->string('food');
