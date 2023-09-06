@@ -32,7 +32,7 @@ class UserUpdateRequest extends FormRequest
             'insurance_name' => 'nullable',
             'color' => 'required',
             'food' => 'required',
-            'role' => 'nullable|in:admin,user'
+            'role' => ['nullable', Rule::in(['user', 'admin', 'customer'])],
         ];
     }
 }

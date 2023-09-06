@@ -30,7 +30,7 @@ class UserCreateRequest extends FormRequest
             'email' => ['nullable', 'email', 'max:255', Rule::unique('users', 'email')->whereNull('deleted_at')],
             'NRC' => 'nullable',
             'insurance_name' => 'nullable',
-            'role' => 'nullable|in:admin,user',
+            'role' => ['nullable', Rule::in(['user', 'admin', 'customer'])],
             'color' => 'required',
             'food' => 'required',
             'password' => ['required','string',Password::min(5)->mixedCase()->numbers()->symbols()->uncompromised(),'confirmed' ]
